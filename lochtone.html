@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+  <title>LochTone — Echomuir</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a1428;
+      --bg-slate: #1a2749;
+      --text-light: #e8eef5;
+      --text-muted: #a8b5c8;
+      --accent-gold: #d4a574;
+      --accent-rust: #a85c4d;
+      --border-subtle: rgba(216, 165, 116, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Libre Baskerville", serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 20, 40, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-gold);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      gap: 1.25rem;
+    }
+
+    .hero-icon {
+      width: 160px;
+      height: 160px;
+      border-radius: 22%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      color: var(--accent-gold);
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      max-width: 700px;
+    }
+
+    .hero .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-top: 0.5rem;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      color: var(--accent-gold);
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Feature cards (Tuner / Metronome) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .feature-card {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent-gold);
+      background-color: rgba(26, 39, 73, 0.85);
+    }
+
+    .screenshot-frame {
+      width: 100%;
+      max-width: 280px;
+      margin-bottom: 2rem;
+      padding: 0.5rem;
+      background: rgba(10, 20, 40, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+    }
+
+    .screenshot {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+    }
+
+    .feature-label {
+      font-size: 12px;
+      color: var(--accent-gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 340px;
+    }
+
+    /* Wider feature panel (Presets, Watch) */
+    .feature-panel {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .feature-panel .feature-label {
+      margin-bottom: 1rem;
+    }
+
+    .feature-panel h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: var(--accent-gold);
+      line-height: 1.25;
+    }
+
+    .feature-panel p {
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .feature-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero-icon {
+        width: 130px;
+        height: 130px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      section {
+        padding: 2.5rem 0;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-panel {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/" class="logo">Echomuir</a>
+      <ul>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#apps">Apps</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="LochTone_icon_canidate_03.png" alt="LochTone app icon" class="hero-icon">
+      <div class="tagline">Highland Bagpipe Tuner &amp; Metronome</div>
+      <h1>Loch in your tone.</h1>
+      <p class="hero-sub">A precision tuner and practice metronome for Highland bagpipers. Quick to use. Deep when you need it.</p>
+      <span class="coming-soon">Coming soon to the App Store</span>
+    </section>
+
+    <!-- Tuner / Metronome cards -->
+    <section id="features">
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="screenshot-frame">
+            <img src="TunerSS_01.png" alt="LochTone tuner screen" class="screenshot">
+          </div>
+          <div class="feature-label">Tuner</div>
+          <h3>Real-time pitch, with detail when you want it.</h3>
+          <p>Live deviation for chanter notes and drones, cent markers, averaged readings, and a per-note focus lock for steady comparison. Reference tones on tap when you'd rather tune by ear.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="screenshot-frame">
+            <img src="MetronomSS_01.png" alt="LochTone metronome screen" class="screenshot">
+          </div>
+          <div class="feature-label">Metronome</div>
+          <h3>A click track that holds the line.</h3>
+          <p>Look-ahead scheduling for steady timing, with subdivision patterns, swing, and a pendulum visual. Practice through the loud parts without losing the beat.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Preset system -->
+    <section id="presets">
+      <div class="feature-panel">
+        <div class="feature-label">Presets</div>
+        <h2>Configure once. Recall instantly.</h2>
+        <p>Reference pitch, profile, threshold, temperament, drones — every tuning detail lives in a preset, accessible right from the tuner. One tap loads a full configuration. Switching between chanters is a preset change, not a settings expedition.</p>
+        <p>Share a preset by link to coordinate tuning across a pipe band: the pipe major sets the standard, every player tunes to it. Quick when you want it quick, deep when you need to dig in.</p>
+      </div>
+    </section>
+
+    <!-- Apple Watch -->
+    <section id="watch">
+      <div class="feature-panel">
+        <div class="feature-label">Apple Watch</div>
+        <h2>The beat on your wrist.</h2>
+        <p>A companion Apple Watch app delivers the metronome's beat through wrist haptics — a channel that isn't competing with your pipe. Useful at practice tempos where your eyes are on the music and your ears are full of drone. Not a substitute for the audible click at the upper end of the dial.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Echomuir LLC</p>
+    <div class="footer-links">
+      <a href="/loctone-privacy.html">Privacy Policy</a>
+      <a href="/support.html">Support</a>
+      <a href="mailto:studio@echomuir.com">studio@echomuir.com</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 13px; color: var(--text-muted);">Made with care in New York.</p>
+  </footer>
+
+</body>
+</html>
