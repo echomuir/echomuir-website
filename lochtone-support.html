@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+  <title>LochTone Support — Echomuir</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a1428;
+      --bg-slate: #1a2749;
+      --text-light: #e8eef5;
+      --text-muted: #a8b5c8;
+      --accent-gold: #d4a574;
+      --border-subtle: rgba(216, 165, 116, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Libre Baskerville", serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 20, 40, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-gold);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 3rem 0;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 3rem 0 1rem;
+    }
+
+    .page-header h1 {
+      font-size: 42px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .crumbs {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .crumbs a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .crumbs a:hover {
+      color: var(--accent-gold);
+    }
+
+    .help-note {
+      background-color: rgba(212, 165, 116, 0.07);
+      border-left: 3px solid var(--accent-gold);
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+
+    .help-note a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    .help-note a:hover {
+      text-decoration: underline;
+    }
+
+    .faq-toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 1.5rem;
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .faq-toc-label {
+      width: 100%;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-toc a {
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .faq-toc a:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      color: var(--accent-gold);
+      scroll-margin-top: 110px;
+    }
+
+    .faq-item {
+      margin-bottom: 2rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .faq-question {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .faq-answer p + p {
+      margin-top: 0.75rem;
+    }
+
+    .faq-answer ul,
+    .faq-answer ol {
+      margin-top: 0.75rem;
+      margin-left: 1.5rem;
+    }
+
+    .faq-answer li {
+      margin-bottom: 0.4rem;
+    }
+
+    .faq-answer strong {
+      color: var(--text-light);
+      font-weight: 700;
+    }
+
+    .contact-section {
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .contact-section h3 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .help-email {
+      font-size: 18px;
+      color: var(--accent-gold);
+      font-weight: 500;
+      margin: 1.5rem 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 32px;
+      }
+
+      nav ul {
+        gap: 1rem;
+        font-size: 13px;
+      }
+
+      section {
+        padding: 2rem 0;
+      }
+
+      .contact-section {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/" class="logo">Echomuir</a>
+      <ul>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#apps">Apps</a></li>
+        <li><a href="/support.html">Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="crumbs"><a href="/support.html">Support</a> &nbsp;/&nbsp; LochTone</div>
+
+  <main>
+
+    <section class="page-header">
+      <h1>LochTone Support</h1>
+      <p>Frequently asked questions about the LochTone app.</p>
+    </section>
+
+    <section>
+
+      <div class="help-note">
+        Questions not answered here? Email <a href="mailto:help@echomuir.com">help@echomuir.com</a> — we aim to respond within 24 hours.
+      </div>
+
+      <div class="faq-toc">
+        <span class="faq-toc-label">Jump to</span>
+        <a href="#getting-started">Getting Started</a>
+        <a href="#tuner">Tuner</a>
+        <a href="#presets">Presets</a>
+        <a href="#temperament">Temperament</a>
+        <a href="#metronome">Metronome</a>
+        <a href="#watch">Apple Watch</a>
+        <a href="#appearance">Appearance</a>
+        <a href="#privacy">Privacy &amp; Data</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+      </div>
+
+    </section>
+
+    <!-- Getting Started -->
+    <section>
+      <h2 class="section-title" id="getting-started">Getting Started</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What is LochTone?</div>
+        <div class="faq-answer">LochTone is a tuner and metronome designed specifically for Highland bagpipers. It understands the unique intervals and frequency range of the Great Highland Bagpipe, so every note target is meaningful — not just a generic chromatic pitch.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What devices does LochTone support?</div>
+        <div class="faq-answer">iPhone (iOS 17+), iPad, and Apple Watch. The Watch app is a companion that provides haptic beat feedback from the metronome.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Does LochTone work with practice chanters?</div>
+        <div class="faq-answer">Yes. The built-in <strong>Practice Chanter 235Hz</strong> preset is tuned for typical practice chanters (~230 Hz Low A) and disables drone notes, since practice chanters don't have them.</div>
+      </div>
+    </section>
+
+    <!-- Tuner -->
+    <section>
+      <h2 class="section-title" id="tuner">Tuner</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I start tuning?</div>
+        <div class="faq-answer">Tap the microphone button on the Tuner screen. LochTone will listen for your instrument and display each detected note with its deviation from the target tuning. Green means in tune; blue means flat; orange means sharp.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Why does the tuner ask for microphone permission?</div>
+        <div class="faq-answer">LochTone processes audio in real time to detect pitch. All audio stays on your device — nothing is recorded, stored, or transmitted.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What does the "in-tune zone" setting do?</div>
+        <div class="faq-answer">It controls how many cents of deviation are considered acceptable (shown as the green zone on each note's slider). A wider zone (7–10 cents) is forgiving for practice; a tighter zone (3–5 cents) is better for competition preparation.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Why does the tuner stop automatically?</div>
+        <div class="faq-answer">To save battery. The tuner times out after 5 minutes of listening. Tap the microphone button again to restart.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What does the target button do?</div>
+        <div class="faq-answer">Each note row has a target button (the crosshair icon on the left). Tapping it locks the tuner's attention to that note — when a detected pitch could match more than one note (for example, a drone and a chanter note at the same frequency), focus ensures the reading goes to the note you care about. Tap it again to unlock. This is especially useful when tuning drones, where the bass and tenor frequencies overlap with chanter notes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I play a reference tone for a specific note?</div>
+        <div class="faq-answer">Yes. Tap the speaker icon next to any note to hear its target frequency through your device speaker or headphones.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What is "Measure Low A"?</div>
+        <div class="faq-answer">This feature listens to your instrument's Low A through the microphone and measures its actual frequency over several seconds. The result can be saved as your reference pitch, so all other note targets adjust to match your specific instrument.</div>
+      </div>
+    </section>
+
+    <!-- Presets -->
+    <section>
+      <h2 class="section-title" id="presets">Presets</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What is a preset?</div>
+        <div class="faq-answer">A preset is a complete tuning configuration: reference pitch (Low A frequency), note ratios (temperament), in-tune threshold, and drone display. Switching presets applies all of these settings in one tap.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What presets come built in?</div>
+        <div class="faq-answer">
+          <ul>
+            <li><strong>Standard Highland 476Hz</strong> — common solo piping pitch</li>
+            <li><strong>Competition 482Hz</strong> — tight tolerance for competition</li>
+            <li><strong>Concert Pitch 440Hz</strong> — equal temperament, standard orchestral reference</li>
+            <li><strong>Bb Chanter 466Hz</strong> — Bb practice/band chanter</li>
+            <li><strong>Practice Chanter 235Hz</strong> — low-pitch practice chanter, drones disabled</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I create my own presets?</div>
+        <div class="faq-answer">Yes. Tap "New from Current" in the preset sheet. You can also duplicate any existing preset (including built-ins) and edit the copy.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What does "Set from Tuner Readings" do?</div>
+        <div class="faq-answer">When editing a preset, this button appears if the tuner has measured at least one note. It takes your measured note frequencies and sets them as the new target ratios for that preset. This is useful for a pipe major who wants to capture a specific chanter's tuning and distribute it to the band.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I share a preset?</div>
+        <div class="faq-answer">Tap the ellipsis menu on any preset and choose "Share." This sends a link that other LochTone users can tap to import the preset. The link contains only tuning parameters — no personal information.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What happens if I import a preset with the same name as one I already have?</div>
+        <div class="faq-answer">LochTone automatically renames it (e.g. "Band Tuning" becomes "Band Tuning (2)") and shows you the new name before you confirm the import.</div>
+      </div>
+    </section>
+
+    <!-- Temperament & Tuning Model -->
+    <section>
+      <h2 class="section-title" id="temperament">Temperament &amp; Tuning Model</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">Why doesn't LochTone use equal temperament by default?</div>
+        <div class="faq-answer">Highland bagpipes don't use equal temperament. The chanter produces a Mixolydian scale with intervals that differ from the piano. LochTone's default "Standard Highland" profile uses the traditional just-intonation ratios that pipers expect.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I switch to equal temperament?</div>
+        <div class="faq-answer">Yes. In the preset editor under Temperament, tap "Equal Temperament." The Concert Pitch 440Hz preset also uses equal temperament.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I customize individual note ratios?</div>
+        <div class="faq-answer">Yes. In the preset editor, tap "Edit Ratios" to adjust each note's frequency ratio or target Hz individually. This is useful for matching a specific chanter's characteristics or a band's agreed temperament.</div>
+      </div>
+    </section>
+
+    <!-- Metronome -->
+    <section>
+      <h2 class="section-title" id="metronome">Metronome</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What time signatures are available?</div>
+        <div class="faq-answer">None (no accented first beat), 2/4, 3/4, 4/4, 5/4, 6/8, 9/8, and 12/8. Each time signature has multiple rhythm patterns (quarter notes, eighths, triplets, sixteenths, swing, etc.).</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What is the "None" time signature?</div>
+        <div class="faq-answer">It plays four beats with no accented first beat — useful when you want a steady click without downbeat emphasis.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What does "Play in background" do?</div>
+        <div class="faq-answer">When enabled, the metronome continues playing when you switch to another app or lock your screen. When disabled, the metronome stops when the app goes to the background.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What is the auto-stop timer?</div>
+        <div class="faq-answer">The metronome automatically stops after a set time (1–15 minutes) to prevent battery drain if you walk away. A countdown warning appears before it stops.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How does tap tempo work?</div>
+        <div class="faq-answer">Tap the "Tap" button at least three times at your desired tempo. LochTone calculates the average interval and sets the BPM accordingly.</div>
+      </div>
+    </section>
+
+    <!-- Apple Watch -->
+    <section>
+      <h2 class="section-title" id="watch">Apple Watch</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What does the Watch app do?</div>
+        <div class="faq-answer">The Watch companion app provides haptic (vibration) beat feedback on your wrist, synchronized to the phone's metronome. This is especially useful for pipers, since the instrument's volume makes it difficult to hear a click metronome. Note that fast notes are a challenge for the Watch's hardware — only slower tempos are supported reliably.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I connect the Watch?</div>
+        <div class="faq-answer">Install the LochTone Watch app on your Apple Watch from the iPhone's Watch app. Open both apps — they connect automatically via Bluetooth.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I control the metronome from the Watch?</div>
+        <div class="faq-answer">Yes. The Watch displays the current BPM and has start/stop and BPM adjustment buttons that control the phone's metronome.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I customize the Watch haptics?</div>
+        <div class="faq-answer">Yes. In the metronome controls, tap "Watch Haptics" to choose different vibration types for strong, medium, weak, and ghost beats. You can also enable subdivision haptics for faster patterns.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Why does the Watch status dot turn yellow?</div>
+        <div class="faq-answer">This means your current BPM and pattern produce subdivisions faster than the Watch can reliably deliver haptics (under 250 ms apart). The Watch will still tap on main beats but skips subdivisions to avoid unreliable timing.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">For the best haptic experience on the Watch:</div>
+        <div class="faq-answer">
+          <ol>
+            <li>Turn on <strong>Prominent Haptic</strong> in Watch Settings &gt; Sounds &amp; Haptics</li>
+            <li>Lower the <strong>Alert Volume</strong> to minimize the brief chime that accompanies each haptic tap</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appearance -->
+    <section>
+      <h2 class="section-title" id="appearance">Appearance</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I change to light or dark mode?</div>
+        <div class="faq-answer">Yes. Open the About screen and use the Appearance picker. Choose System (follows your device setting), Light, or Dark. The default is System.</div>
+      </div>
+    </section>
+
+    <!-- Privacy & Data -->
+    <section>
+      <h2 class="section-title" id="privacy">Privacy &amp; Data</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">Does LochTone collect any data?</div>
+        <div class="faq-answer">No. LochTone does not collect, store, transmit, or share any personal data. There are no accounts, no analytics, no advertising, and no network requests.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Is my microphone audio recorded?</div>
+        <div class="faq-answer">No. Audio is processed in real time on your device for pitch detection only. It is never recorded, saved, or sent anywhere.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Where are my settings stored?</div>
+        <div class="faq-answer">Locally on your device. Settings are included in standard iCloud/iTunes device backups if you have those enabled, but are never sent to any external server.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I delete all my data?</div>
+        <div class="faq-answer">Open the About screen (info button on the Tuner tab) and tap "Factory Reset." This erases all presets and settings (including appearance mode) and cannot be undone.</div>
+      </div>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section>
+      <h2 class="section-title" id="troubleshooting">Troubleshooting</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">The tuner isn't detecting my instrument</div>
+        <div class="faq-answer">
+          <ul>
+            <li>Make sure microphone permission is granted (Settings &gt; LochTone &gt; Microphone)</li>
+            <li>Move the microphone closer to the instrument</li>
+            <li>Ensure no other app is using the microphone</li>
+            <li>The tuner works best with a single sustained note — avoid playing multiple notes quickly.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">The metronome stops when I switch apps</div>
+        <div class="faq-answer">Enable "Play in background" in the metronome controls. This allows audio to continue when the app is not in the foreground.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Audio stops when I plug in or unplug headphones</div>
+        <div class="faq-answer">LochTone automatically recovers from audio route changes. If audio doesn't resume, tap the listen or play button to restart.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">The Watch isn't connecting</div>
+        <div class="faq-answer">
+          <ul>
+            <li>Ensure both apps are open (LochTone on iPhone, the LochTone Watch app on Apple Watch)</li>
+            <li>Check that Bluetooth is enabled on both devices</li>
+            <li>The Watch may take a few seconds to connect after opening the app</li>
+            <li>If previously paired and now showing "No Watch," try reopening the Watch app</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">I imported a preset but the settings look wrong</div>
+        <div class="faq-answer">Presets include a temperament profile name. If the imported preset references a profile that doesn't exist on your device, it may fall back to Standard Highland. The note ratios themselves are always preserved.</div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <div class="contact-section">
+        <h3>Still need help?</h3>
+        <p>Reach out with any questions or feedback.</p>
+        <div class="help-email">help@echomuir.com</div>
+        <p style="color: var(--text-muted); margin-top: 1rem;">We aim to respond within 24 hours.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/lochtone.html">LochTone</a>
+      <a href="/loctone-privacy.html">Privacy Policy</a>
+      <a href="/support.html">Support</a>
+      <a href="mailto:help@echomuir.com">help@echomuir.com</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 13px; color: var(--text-muted);">Made with care in New York.</p>
+  </footer>
+
+</body>
+</html>

@@ -83,12 +83,12 @@
     }
 
     section {
-      padding: 4rem 0;
+      padding: 3rem 0;
     }
 
     .page-header {
       text-align: center;
-      padding: 3rem 0;
+      padding: 3rem 0 1rem;
     }
 
     .page-header h1 {
@@ -104,25 +104,84 @@
       margin: 0 auto;
     }
 
+    .help-note {
+      background-color: rgba(212, 165, 116, 0.07);
+      border-left: 3px solid var(--accent-gold);
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .help-note a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    .help-note a:hover {
+      text-decoration: underline;
+    }
+
     .section-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 500;
       margin-bottom: 2rem;
       color: var(--accent-gold);
     }
 
+    .support-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background-color: var(--bg-slate);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      text-decoration: none;
+      color: var(--text-light);
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .support-card:hover {
+      border-color: var(--accent-gold);
+      background-color: rgba(26, 39, 73, 0.85);
+    }
+
+    .support-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 22%;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .support-card h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: var(--accent-gold);
+    }
+
+    .support-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
     .faq-item {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.75rem;
       border-bottom: 1px solid var(--border-subtle);
     }
 
     .faq-item:last-child {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
     .faq-question {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 500;
       margin-bottom: 0.75rem;
       color: var(--text-light);
@@ -138,7 +197,7 @@
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
       padding: 3rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
       text-align: center;
     }
 
@@ -146,31 +205,6 @@
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 1.5rem;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-links a {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: transparent;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-
-    .contact-links a:hover {
-      background-color: var(--accent-gold);
-      color: var(--bg-dark);
     }
 
     .help-email {
@@ -198,6 +232,7 @@
       justify-content: center;
       gap: 2rem;
       margin-top: 1rem;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
@@ -216,19 +251,26 @@
       }
 
       nav ul {
-        display: none;
+        gap: 1rem;
+        font-size: 13px;
       }
 
       section {
-        padding: 2.5rem 0;
+        padding: 2rem 0;
+      }
+
+      .support-card {
+        padding: 1.25rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .support-icon {
+        width: 56px;
+        height: 56px;
       }
 
       .contact-section {
         padding: 2rem;
-      }
-
-      .contact-links {
-        flex-direction: column;
       }
     }
   </style>
@@ -251,31 +293,50 @@
     <!-- Page Header -->
     <section class="page-header">
       <h1>Support</h1>
-      <p>Help and answers for Echomuir apps. Can't find what you need? Get in touch.</p>
+      <p>Help and answers for Echomuir apps.</p>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- Help note -->
     <section>
-      <h2 class="section-title">Frequently Asked Questions</h2>
-
-      <div class="faq-item">
-        <div class="faq-question">How do I get started with LochTone?</div>
-        <div class="faq-answer">Open the app and select a bagpipe chanter preset. Confirm that Low A is a value you like, or change it by selecting the presets and modifing it in the dropdown edit menu. Start with a single note and work through each until your chanter is locked in. Detailed settings are available in the edit screen if you need more control.</div>
+      <div class="help-note">
+        Questions can be directed to <a href="mailto:help@echomuir.com">help@echomuir.com</a> — we aim to respond within 24 hours.
       </div>
+    </section>
+
+    <!-- Per-app support -->
+    <section>
+      <h2 class="section-title">App Support</h2>
+
+      <a href="/lochtone-support.html" class="support-card">
+        <img src="LochTone_icon_canidate_03.png" alt="LochTone app icon" class="support-icon">
+        <div>
+          <h3>LochTone</h3>
+          <p>Tuner &amp; metronome for Highland bagpipers — FAQ, presets, Apple Watch, and troubleshooting.</p>
+        </div>
+      </a>
+    </section>
+
+    <!-- General questions -->
+    <section>
+      <h2 class="section-title">General Questions</h2>
 
       <div class="faq-item">
-        <div class="faq-question">Do the apps work offline?</div>
+        <div class="faq-question">Do Echomuir apps work offline?</div>
         <div class="faq-answer">Yes. All Echomuir apps are designed to work offline. No internet connection required once installed.</div>
       </div>
 
       <div class="faq-item">
         <div class="faq-question">What devices are supported?</div>
-        <div class="faq-answer"> All apps are built to work on modern iOS devices without lag or compatibility issues.</div>
+        <div class="faq-answer">All apps are built to work on modern iOS devices without lag or compatibility issues. See each app's support page for specific iOS version requirements.</div>
       </div>
 
+      <div class="faq-item">
+        <div class="faq-question">Do Echomuir apps collect personal data?</div>
+        <div class="faq-answer">No. Echomuir apps don't collect, store, transmit, or share personal data. There are no accounts, no analytics, and no advertising. See each app's privacy policy for details.</div>
+      </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section>
       <div class="contact-section">
         <h3>Didn't find an answer?</h3>
@@ -289,10 +350,12 @@
 
   <footer>
     <div class="footer-links">
+      <a href="/lochtone.html">LochTone</a>
+      <a href="/loctone-privacy.html">Privacy Policy</a>
       <a href="mailto:studio@echomuir.com">studio@echomuir.com</a>
       <a href="mailto:help@echomuir.com">help@echomuir.com</a>
     </div>
-    <p style="margin-top: 2rem; font-size: 13px; color: var(--text-muted);">Made with care in New York</p>
+    <p style="margin-top: 2rem; font-size: 13px; color: var(--text-muted);">Made with care in New York.</p>
   </footer>
 
 </body>
